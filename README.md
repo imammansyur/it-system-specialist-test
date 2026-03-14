@@ -1,8 +1,8 @@
 # IT System Specialist Test
 
-# 1. Tes Pemrograman & Database (Logika)
+## 1. Tes Pemrograman & Database (Logika)
 
-## a. Database
+### a. Database
 
 Saya menggunakan syntax MySQL untuk pengerjaan database.
 
@@ -16,16 +16,16 @@ CREATE TABLE barang (
 );
 ```
 
-## b. Query
+### b. Query
 
-```
+```sql
 SELECT *
 FROM barang
 WHERE status='rusak'
 AND tgl_maintenance >= CURRENT_DATE - INTERVAL 6 MONTH;
 ```
 
-## c. Logika Coding
+### c. Logika Coding
 
 Asumsi yang saya gunakan adalah:
 - Database berdasarkan soal 1a
@@ -44,7 +44,7 @@ Secara garis besar, yang akan saya lakukan dengan skrip ini adalah:
 - Print teks output dari query
 - Menutup koneksi dengan database MySQL
 
-```
+```python
 import mysql.connector
 
 config = {
@@ -67,15 +67,15 @@ cursor.close()
 connection.close()
 ```
 
-# 2. Tes Infrastruktur & Jaringan (Troubleshooting)
+## 2. Tes Infrastruktur & Jaringan (Troubleshooting)
 
-## a. Masalah Jaringan
+### a. Masalah Jaringan
 
 1. Melakukan konfirmasi apakah benar-benar terjadi masalah tersebut dengan melakukan ping & traceroute dari perangkat user yang bermasalah ke internet dan jaringan uplink dari lantai kantor.
 2. Memastikan tidak ada konfigurasi yang salah yang berimbas pada jaringan lantai tersebut tidak dapat terkoneksi ke internet. Konfigurasi bisa berupa routing table, ACL/firewall rule, dan konfigurasi switch.
 3. Memastikan bahwa perangkat jaringan terhubung secara fisik, mulai dari access point hingga switch dan router, baik dari kabel UTP, kaber power device, dan port yang terhubung.
 
-## b. Keamanan Fisik
+### b. Keamanan Fisik
 
 Pertama, saya akan membuatkan jaringan WLAN baru khusus tamu yang berbeda dari jaringan internal perusahaan. Kemudian, saya membuat VLAN baru dari jaringan tamu. Setelah itu, saya akan membuat rule pada Access Control List (ACL) atau firewall untuk membatasi akses ke jaringan internal dan hanya membolehkan akses ke internet. Rule yang saya pakai seperti berikut:
 
@@ -84,14 +84,14 @@ deny [source: jaringan tamu] [dest: jaringan internal]
 allow [source: jaringan tamu] 0.0.0.0/0
 ```
 
-# 3. Tes Administrasi Server (Manajemen & Recovery)
+## 3. Tes Administrasi Server (Manajemen & Recovery)
 
-## a. Backup & Restore
+### a. Backup & Restore
 
 Saya akan menggunakan RAID pada disk dari server database. RAID sendiri merupakan teknologi yang menggabungkan beberapa disk menjadi satu. Seperti contoh, RAID 1 membutuhkan 2 disk untuk membuat 1 disk, kedua disk memuat data yang sama (mirroring). Rusaknya 1 disk tidak menghilangkan data yang ada sehingga hanya perlu dilakukan penggantian disk yang rusak dengan yang baru. 
 
 Namun, RAID saja tidak cukup untuk mencegah hilangnya data dari kerusakan 1 pasang disk RAID, yang mengakibatkan downtime server database. Replikasi database diperlukan untuk menjaga database tetap dapat diakses pada saat database lain mengalami disk failure yang berujung hilangnya data. Replikasi database menggunakan sistem master-slave, master untuk akses CRUD dan slave untuk akses read saja.
 
-## b. Optimasi
+### b. Optimasi
 
 Saat server diakses oleh banyak karyawan secara bersamaan, saya akan memeriksa resource server, mulai dari CPU, RAM, Swap, Disk IO, dan Network. Untuk pengecekan, saya menggunakan `top` untuk melihat resource sekaligus melihat program yang saat ini berjalan. 
