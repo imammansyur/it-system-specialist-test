@@ -6,7 +6,7 @@
 
 Saya menggunakan syntax MySQL untuk pengerjaan database.
 
-```
+```sql
 CREATE TABLE barang (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nama_barang VARCHAR(255) NOT NULL,
