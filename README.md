@@ -16,6 +16,9 @@ CREATE TABLE barang (
 );
 ```
 
+### Edit:
+Memperbaiki kesalahan syntax yaitu kurangnya `)` setelah 'dipinjam' dan trailing `,` setelah tgl_maintenance DATE.
+
 ### b. Query
 
 ```sql
@@ -24,6 +27,9 @@ FROM barang
 WHERE status='rusak'
 AND tgl_maintenance >= CURRENT_DATE - INTERVAL 6 MONTH;
 ```
+
+### Edit:
+Dalam query sql, operator `<` berarti lebih lama dari, dan `>` berarti lebih baru dari. Dalam kasus ini, seharusnya yang digunakan adalah `<=` untuk menunjukkan yang lebih lama atau sama dengan 6 bulan.
 
 ### c. Logika Coding
 
@@ -61,11 +67,14 @@ cursor = connection.cursor()
 cursor.execute(query)
 
 for row in cursor:
-    print row
+    print(row)
 
 cursor.close()
 connection.close()
 ```
+
+### Edit:
+Saya seharusnya menggunakan `print(row)` yang telah saya ralat di atas dan bukan `print row` yang sebelumnya saya pakai.
 
 ## 2. Tes Infrastruktur & Jaringan (Troubleshooting)
 
