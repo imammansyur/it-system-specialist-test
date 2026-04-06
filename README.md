@@ -11,8 +11,8 @@ CREATE TABLE barang (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nama_barang VARCHAR(255) NOT NULL,
     serial_number VARCHAR(255),
-    status VARCHAR(8) NOT NULL CHECK (status IN ('tersedia','rusak','dipinjam'),
-    tgl_maintenance DATE,
+    status VARCHAR(8) NOT NULL CHECK (status IN ('tersedia','rusak','dipinjam')),
+    tgl_maintenance DATE
 );
 ```
 
